@@ -15,6 +15,48 @@
         <a href="oferta.html">Oferta</a>
         <a href="koszty.html">Kalkulator kosztów</a>
     </nav>
+    <main>
+        <h1>Kalkulator kosztów montażu</h1>
+        <label>Szerokość pomieszczenia [m]:</label>
+        <input type="number" name="szerokosc" id="szerokosc">
+        <label>Długość pomieszczenia [m]:</label>
+        <input type="number" name="dlugosc" id="dlugosc">
+        <p>Typ panelu</p>
+        <input type="radio" name="punkt" id="laminowane">
+        <label for="laminowane">Panel laminowane</label><br>
+        <input type="radio" name="punkt" id="winylowe">
+        <label for="winylowe">Panel winylowe</label><br>
+        <input type="radio" name="punkt" id="deska">
+        <label for="deska">Deska podłogowa</label><br>
+        <button type="button" onclick="oblicz()">Oblicz</button>
+        <p id="wynik"></p>
+        <script>
+        function oblicz() {
+            let szerokosc = +document.getElementById("szerokosc").value;
+            let dlugosc = +document.getElementById("dlugosc").value;
+            const wynik = document.getElementById("wynik");
+            const typLaminowane = document.getElementById("laminowane");
+            const typWinylowe = document.getElementById("winylowe");
+            const typDeska = document.getElementById("deska");
+            if (szerokosc == '' || dlugosc == '') {
+                wynik.innerHTML = "Wprowadź poprawne dane";
+            } else {
+                let pole = dlugosc * szerokosc;
+                let cena = 0
+                if (typLaminowane.checked) {
+                    cena = 12 * pole;
+                }
+                if (typWinylowe.checked) {
+                    cena = 14 * pole;
+                }
+                if (typDeska.checked) {
+                    cena = 18 * pole;
+                }
+                wynik.innerHTML = `Pole powierzchni pomieszczenia: ${pole}, koszt montażu ${cena}`;
+            }
+        }
+    </script>
+    </main>
     <footer>
         <h5>Autor strony:</h5>
     </footer>
